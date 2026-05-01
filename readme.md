@@ -93,6 +93,13 @@ production apps.
 - Else if there is any instance created in the previous executions or commands, then I need to return dbInstance.
 
 
+### Repository
+
+- Class mainly used to manage multiple sources of data
+- Isolates the data sources from the rest of the app and provides a clean API for data access to rest of the app.
+- Can gather data from different REST APIs, cache, local database storage.
+- For this project, a repository is not needed but we will create one for demonstration purposes
+
 
 
 
