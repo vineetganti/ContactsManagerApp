@@ -10,7 +10,7 @@ import androidx.room.RoomDatabase;
 
 public  abstract class ContactDatabase extends RoomDatabase {
 
-    public abstract ContactDAO contactDAO();
+    public abstract ContactDAO getContactDAO();
 
     private static ContactDatabase dbInstance;
 

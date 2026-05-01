@@ -98,7 +98,69 @@ production apps.
 - Class mainly used to manage multiple sources of data
 - Isolates the data sources from the rest of the app and provides a clean API for data access to rest of the app.
 - Can gather data from different REST APIs, cache, local database storage.
-- For this project, a repository is not needed but we will create one for demonstration purposes
+- For this project, a repository is not needed but we will create one for demonstration purposes.
+- private final ContactDAO contactDAO; -- When dealing with room databases, deal with the ContactDAO object in the repository.
+- This repository encapsulates data access and retrieval logic. It receives a contact Dao object 
+in its constructor, which provides access to the local database, assuming you are using room.
+- So we have three methods insert, delete and get all contacts we need to use these methods from the repository.
+- Add contact.
+It receives a contact object we need to call this method insert in the Dao.
+So we use this contact dao object dot insert.
+And here we need to pass this parameter as a parameter inside this insert method.
+It's just managing all the methods in the different data sources.
+Again, if we have only one data source, we don't need to use the repository.
+  public void addContact(Contacts contact) {
+  contactDAO.insert(contact);
+  }
+- Publicvoid delete contact receives a contact object and execute the contact Dao dot delete method and 
+passing the contact as the argument for this delete method.
+- If we have any source of data, we need to mention all the methods here in the repository.
+
+
+- Room database operations such as insertions, updates and queries should not be executed on the main
+UI thread because they can potentially block the UI causing the app to become unresponsive.
+We need to offload these database operations to background threads.
+By doing this, you keep the UI thread free to handle user interactions and ensure that your app remains
+responsive.
+- To prevent any possible errors and UI crashes, we need to use handlers and the executer services.
+- Usually a thread pool executor is used to offload these database operations to background threads.
+By doing this, we keep the UI thread free to handle user interactions and ensure that our app remains
+responsive as single threaded executer is created, meaning that database operation will be executed
+sequentially in a background thread.
+-  UI updates must be performed on the main UI thread to avoid view related issues. The handler with 
+Looper dot get main Looper method is used to post tasks to the main UI threads messages queue. Ensures
+that any UI related code such as updating text views or recycler views is executed on the main thread.
+   Handler handler = new Handler(Looper.getMainLooper());
+- You achieve many benefits such as thread separation synchronization and responsive UI thread separation.
+
+### Executing Tasks on a Separate Thread Using Runnable
+  The Core Problem
+  When performing operations like database reads/writes, running them on the main (UI) thread causes
+  the app to freeze or crash. So these tasks must be offloaded to a background thread.
+  The Key Components
+1. Runnable
+   An interface with a single method — void run() — that wraps the code you want to execute asynchronously.
+Think of it as a "task container."
+2. ExecutorService
+   Manages a pool of background threads. You submit a Runnable to it, and it handles running that
+task off the main thread.
+3. Handler
+   Lives on the main (UI) thread. Once the background task finishes, the Handler is used to safely push
+UI updates back to the main thread.
+
+
+### LiveData
+
+- Live data is typically used to expose data from the room database to the ViewModel and ultimately to
+the UI components, activities or fragments.
+
+- The repository interacts with the room database to retrieve data and it wraps the data in a live data
+object before passing it to the ViewModel.
+
+- By using the live data, the repository ensures that the data can be observed by the ViewModel, and
+any changes in the underlying data are automatically reflected in the UI without the need to for explicit
+updates.
+
 
 
 
