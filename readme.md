@@ -161,6 +161,17 @@ object before passing it to the ViewModel.
 any changes in the underlying data are automatically reflected in the UI without the need to for explicit
 updates.
 
+### ViewModel
+- The purpose of the ViewModel is to acquire and keep the information that is necessary for an activity
+or a fragment
+- Acts as a link between model and View. Responsible for transforming data from the model.
+- Provides data streams to the view.
+- If you need to use the context inside your view model, you should use Android View model AVM instead
+of a view model because it contains the application context.
+- By adding in methods from the Repository.java for fetching all contacts, add contact and delete contact,
+we can provide data to the UI, observe changes in the user data and automatically update UI when data changes
+and contacts can be inserted into room database through ViewModel and also be deleted.
+- The usage of MVVM architecture is clearly displayed here with separation of ViewModel with UI and data source.
 
 
 
