@@ -10,6 +10,7 @@ import java.util.List;
 
 @Dao
 public interface ContactDAO {
+
     @Insert
     void insert(Contacts contact);
 

@@ -1,3 +1,5 @@
+import jdk.jfr.internal.jfc.model.SettingsLog.enable
+
 plugins {
     alias(libs.plugins.android.application)
 }
@@ -36,6 +38,11 @@ android {
     buildFeatures{
         viewBinding = true
         dataBinding = true
+    }
+    splits {
+        abi {
+            isEnable = false  // simplest fix
+        }
     }
 }
 
